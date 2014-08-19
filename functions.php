@@ -41,8 +41,50 @@ unset($file, $filepath);
 
 
 /*
- * => Debug
- * --------------------------------------*/
+ * => Custom Admin Columns !
+ * ---------------------------------------------------------------------------*/
+
+/* ALL POST TYPES: posts AND custom post types */
+// add_filter('manage_posts_columns', 'CUSTOM_columns_head');
+// add_action('manage_posts_custom_column', 'CUSTOM_columns_content', 10, 2);
+
+/* ONLY WORDPRESS DEFAULT POSTS */
+// add_filter('manage_post_posts_columns', 'CUSTOM_columns_head', 10);
+// add_action('manage_post_posts_custom_column', 'CUSTOM_columns_content', 10, 2);
+
+/* ONLY WORDPRESS DEFAULT PAGES */
+// add_filter('manage_page_posts_columns', 'CUSTOM_columns_head', 10);
+// add_action('manage_page_posts_custom_column', 'CUSTOM_columns_content', 10, 2);
+
+/* ONLY CUSTOM POST TYPES */
+// add_filter('manage_POSTTYPE_posts_columns', 'CUSTOM_columns_head', 10);
+// add_action('manage_POSTTYPE_posts_custom_column', 'CUSTOM_columns_content', 10, 2);
+
+/* CREATE TWO FUNCTIONS TO HANDLE THE COLUMN */
+function CUSTOM_columns_head($defaults) {
+  $defaults['author_photo'] = 'Author Photo';
+  $defaults['another_custom'] = 'Another one';
+  return $defaults;
+}
+function CUSTOM_columns_content($column_name, $post_ID) {
+  if ($column_name == 'author_photo') {
+    if ( $photo = get_field('author_photo', $post_ID) ) { ?>
+      <img src="<?= $photo['url'] ?>" style="width:60px;height:60px;" />
+    <?php } else { ?>
+      <img src="http://placehold.it/60&text=no+image" /><?php
+    }
+  }
+
+  if ($column_name == 'another_custom') {
+    echo "content here";
+  }
+}
+
+
+/*
+ * => Debug Function
+ * ---------------------------------------------------------------------------*/
+
 if ( ! function_exists( 'skyhook_debug' ) ) {
   function skyhook_debug( $message ) {
     if ( WP_DEBUG === true ) {
@@ -58,7 +100,8 @@ if ( ! function_exists( 'skyhook_debug' ) ) {
 
 /*
  * => Turn off default image links
- * --------------------------------------*/
+ * ---------------------------------------------------------------------------*/
+
 function imagelink_setup() {
   $image_set = get_option( 'image_default_link_type' );
   if ($image_set !== 'none') {
@@ -69,8 +112,8 @@ add_action('admin_init', 'imagelink_setup', 10);
 
 
 /*
- * => Custom Login
- * --------------------------------------*/
+ * => Custom Login Logo and Links
+ * ---------------------------------------------------------------------------*/
 function custom_login_logo() { ?>
   <style type="text/css">
       body.login div#login h1 a {
@@ -99,7 +142,8 @@ function my_login_logo_url_title() {
 
 /*
  * => Hide certain menu items
- * --------------------------------------*/
+ * ---------------------------------------------------------------------------*/
+
 function remove_menu_items() {
   // provide a list of usernames who can access special admin menu items
   $admins = array( 
@@ -122,8 +166,9 @@ add_action( 'admin_menu', 'remove_menu_items', 999 );
 
 
 /*
- * => Change 'Posts' to 'Blog'
- * --------------------------------------*/
+ * => Change posts to 'blog'
+ * ---------------------------------------------------------------------------*/
+
 function custom_menu_names() {
   global $menu;
   $menu[5][0] = 'Blog';
@@ -132,8 +177,9 @@ add_action( 'admin_menu', 'custom_menu_names', 999 );
 
 
 /*
- * => Change Admin Bar
- * --------------------------------------*/
+ * => Change Admin bar
+ * ---------------------------------------------------------------------------*/
+
 function change_admin_bar() {
 
   // Global
@@ -170,8 +216,9 @@ add_action( 'wp_before_admin_bar_render', 'change_admin_bar' );
 
 
 /*
- * => Replace footer text
- * --------------------------------------*/
+ * => Replace Footer text
+ * ---------------------------------------------------------------------------*/
+
 function replace_footer_text () {
   printf( 
     '<span id="footer-thankyou">%s <a href="%s" target="_blank">%s</a>.</span>',
@@ -183,8 +230,9 @@ function replace_footer_text () {
 add_filter( 'admin_footer_text', 'replace_footer_text' );
 
 /*
- * => Nice Search Queries
- * -----------------------------------------*/
+ * => Nice search queries (not needed if using soil plugin)
+ * ---------------------------------------------------------------------------*/
+
 /**
  * Redirects search results from /?s=query to /search/query/, converts %20 to +
  *
