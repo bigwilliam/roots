@@ -114,7 +114,8 @@ add_action('admin_init', 'imagelink_setup', 10);
 /*
  * => Custom Login Logo and Links
  * ---------------------------------------------------------------------------*/
-function custom_login_logo() { ?>
+function custom_login_logo() { 
+  $logo_url = "http://placehold.it/140x100&text=Custom+Logo"; ?>
   <style type="text/css">
       body.login div#login h1 a {
         background-image: url(<?php echo $logo_url; ?>);
