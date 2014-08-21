@@ -56,7 +56,7 @@ unset($file, $filepath);
 // add_filter('manage_page_posts_columns', 'CUSTOM_columns_head', 10);
 // add_action('manage_page_posts_custom_column', 'CUSTOM_columns_content', 10, 2);
 
-/* ONLY CUSTOM POST TYPES */
+/* ONLY CUSTOM POST TYPES ( change POSTTYPE to match the correct name) */
 // add_filter('manage_POSTTYPE_posts_columns', 'CUSTOM_columns_head', 10);
 // add_action('manage_POSTTYPE_posts_custom_column', 'CUSTOM_columns_content', 10, 2);
 
@@ -229,6 +229,7 @@ function replace_footer_text () {
   );
 }
 add_filter( 'admin_footer_text', 'replace_footer_text' );
+
 
 /*
  * => Nice search queries (not needed if using soil plugin)
