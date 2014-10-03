@@ -217,8 +217,8 @@ function CUSTOM_columns_content($column_name, $post_ID) {
  * => Debug Function
  * ---------------------------------------------------------------------------*/
 
-if ( ! function_exists( 'skyhook_debug' ) ) {
-  function skyhook_debug( $message ) {
+if ( ! function_exists( 'bigwilliam_debug' ) ) {
+  function bigwilliam_debug( $message ) {
     if ( WP_DEBUG === true ) {
       if ( is_array( $message ) || is_object( $message ) ) {
         error_log( print_r( $message, true ) );
@@ -332,17 +332,17 @@ function change_admin_bar() {
   // Add site link
   $wp_admin_bar->add_menu( array(
     'parent' => 'wp-logo',
-    'id'     => 'Skyhook Marketing-site',
-    'title'  => __( 'Skyhook Marketing', 'roots' ),
-    'href'   => 'http://Skyhook Marketing.com'
+    'id'     => 'BigWilliam',
+    'title'  => __( 'BigWilliam', 'roots' ),
+    'href'   => 'http://bigwilliam.com'
   ) );
 
   // Add support link
   $wp_admin_bar->add_menu( array(
     'parent' => 'wp-logo',
-    'id'     => 'Skyhook Marketing-support',
-    'title'  => __( 'Skyhook Marketing Support', 'roots' ),
-    'href'   => 'http://SkyhookMarketing.com/contact'
+    'id'     => 'Contact BigWilliam',
+    'title'  => __( 'Contact BigWilliam', 'roots' ),
+    'href'   => 'http://bigwilliam.com/contact'
   ) );
 }
 add_action( 'wp_before_admin_bar_render', 'change_admin_bar' );
