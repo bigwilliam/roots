@@ -332,7 +332,7 @@ function change_admin_bar() {
   // Add site link
   $wp_admin_bar->add_menu( array(
     'parent' => 'wp-logo',
-    'id'     => 'BigWilliam',
+    'id'     => 'bigwilliam-link',
     'title'  => __( 'BigWilliam', 'roots' ),
     'href'   => 'http://bigwilliam.com'
   ) );
@@ -340,7 +340,7 @@ function change_admin_bar() {
   // Add support link
   $wp_admin_bar->add_menu( array(
     'parent' => 'wp-logo',
-    'id'     => 'Contact BigWilliam',
+    'id'     => 'bigwilliam-contact',
     'title'  => __( 'Contact BigWilliam', 'roots' ),
     'href'   => 'http://bigwilliam.com/contact'
   ) );
@@ -356,8 +356,8 @@ function replace_footer_text () {
   printf( 
     '<span id="footer-thankyou">%s <a href="%s" target="_blank">%s</a>.</span>',
      __( 'Website proudly created by', 'roots' ), 
-     'http://SkyhookMarketing.com/',
-     __( 'Skyhook Marketing', 'roots' ) 
+     'http://bigwilliam.com/',
+     __( 'BigWilliam', 'roots' ) 
   );
 }
 add_filter( 'admin_footer_text', 'replace_footer_text' );
@@ -394,7 +394,6 @@ if ( !function_exists('soil_nice_search_redirect') ) {
   Gravity Forms Placeholders --- http://www.wpbeginner.com/wp-tutorials/how-to-add-placeholder-text-in-gravity-forms/
  *========================================================================*/
 
-<?php
 /* Add a custom field to the field editor (See editor screenshot) */
 add_action("gform_field_standard_settings", "my_standard_settings", 10, 2);
 
