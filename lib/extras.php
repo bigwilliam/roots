@@ -86,6 +86,30 @@ if( function_exists('acf_add_options_page') ) {
 
 
 /*
+ * => Hide certain menu items
+ * ---------------------------------------------------------------------------*/
+
+function remove_menu_items() {
+  // provide a list of usernames who can access special admin menu items
+  $admins = array( 
+    'bigwilliam',
+    'cobbman'
+  );
+
+  // get the current user
+  $current_user = wp_get_current_user();
+
+  // match and remove if needed
+  if( !in_array( $current_user->user_login, $admins ) ) {
+    remove_menu_page('edit.php?post_type=acf-field-group'); // Remove ACF Menu
+    remove_menu_page('acf-options'); // Remove ACF Options
+    remove_menu_page('wptouch-admin-touchboard'); // WP Touch Mobile Theme Plugin
+  }
+}
+add_action( 'admin_menu', 'remove_menu_items', 999 );
+
+
+/*
  * => TinyMCE Customizations
  * ---------------------------------------------------------------------------*/
 /*
@@ -273,29 +297,7 @@ function my_login_logo_url_title() {
 } add_filter( 'login_headertitle', 'my_login_logo_url_title' );
 
 
-/*
- * => Hide certain menu items
- * ---------------------------------------------------------------------------*/
 
-function remove_menu_items() {
-  // provide a list of usernames who can access special admin menu items
-  $admins = array( 
-    'skyhook',
-    'bigwilliam',
-    'cobbman'
-  );
-
-  // get the current user
-  $current_user = wp_get_current_user();
-
-  // match and remove if needed
-  if( !in_array( $current_user->user_login, $admins ) ) {
-    remove_menu_page('edit.php?post_type=acf'); // Remove ACF Menu
-    remove_menu_page('acf-options'); // Remove ACF Options
-    remove_menu_page('wptouch-admin-touchboard'); // WP Touch Mobile Theme Plugin
-  }
-}
-add_action( 'admin_menu', 'remove_menu_items', 999 );
 
 
 /*
