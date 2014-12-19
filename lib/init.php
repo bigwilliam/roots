@@ -7,6 +7,10 @@ function roots_setup() {
   // Community translations can be found at https://github.com/roots/roots-translations
   load_theme_textdomain('roots', get_template_directory() . '/lang');
 
+  // Enable plugins to manage the document title
+  // http://codex.wordpress.org/Function_Reference/add_theme_support#Title_Tag
+  add_theme_support('title-tag');
+
   // Register wp_nav_menu() menus
   // http://codex.wordpress.org/Function_Reference/register_nav_menus
   register_nav_menus(array(
@@ -25,7 +29,7 @@ function roots_setup() {
 
   // Add HTML5 markup for captions
   // http://codex.wordpress.org/Function_Reference/add_theme_support#HTML5
-  add_theme_support('html5', array('caption'));
+  add_theme_support('html5', array('caption', 'comment-form', 'comment-list'));
 
   // Tell the TinyMCE editor to use a custom stylesheet
   add_editor_style('/assets/css/editor-style.css');
