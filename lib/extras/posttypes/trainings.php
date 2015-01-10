@@ -2,14 +2,14 @@
 /**
  * Trainings Post Type
  *
- * @package   naffa2015
+ * @package   roots-reloaded
  * @author    Big William <hello@bigwilliam.com>
  * @license   MIT
  * @link      http://bigwilliam.com/
  * @copyright 2015 Big William
  */
 
-class NAFFA_Training_Post_Type {
+class Custom_Training_Post_Type {
 
 	/**
 	 * Initialize the plugin.
@@ -23,7 +23,7 @@ class NAFFA_Training_Post_Type {
 		add_action( 'init', array( $this, 'register_posttype'), 0 );
 
 		// Register Custom Taxonimies
-		// add_action( 'init', array( $this, 'register_taxonimies'), 0);
+		// add_action( 'init', array( $this, 'register_taxonomies'), 0);
 
 		// Register Shortcodes
 		// 	add_action( 'init', array( $this, 'register_shortcodes'), 0 );
@@ -82,7 +82,7 @@ class NAFFA_Training_Post_Type {
 			'rewrite'             => $rewrite,
 			'capability_type'     => 'page',
 		);
-		register_post_type( 'naffa_training', $args );
+		register_post_type( 'custom_training', $args );
 	}
 
 
@@ -174,4 +174,4 @@ class NAFFA_Training_Post_Type {
 	public function register_acf_fields() {}
 
 }
-$NAFFA_trainings = new NAFFA_Training_Post_Type();
+$custom_trainings = new Custom_Training_Post_Type();
