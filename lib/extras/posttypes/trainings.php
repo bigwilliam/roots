@@ -22,6 +22,9 @@ class Custom_Training_Post_Type {
 		// Register Post Type
 		add_action( 'init', array( $this, 'register_posttype'), 0 );
 
+		// Custom title text
+		add_action( 'init', array( $this, 'custom_title'), 0);
+
 		// Register Custom Taxonimies
 		// add_action( 'init', array( $this, 'register_taxonomies'), 0);
 
@@ -33,7 +36,7 @@ class Custom_Training_Post_Type {
 	}
 
 	/**
-	 * Register Post Type: sliders
+	 * Register Post Type
 	 *
 	 * @since  1.0.0
 	 * @return void
@@ -83,6 +86,27 @@ class Custom_Training_Post_Type {
 			'capability_type'     => 'page',
 		);
 		register_post_type( 'custom_training', $args );
+	}
+
+	/**
+	 * Custom title for this Post Type
+	 * examples: http://codex.wordpress.org/Function_Reference/register_taxonomy
+	 * @since  1.0.0
+	 * @return void
+	 */
+	public function custom_title() {
+
+		function custom_training_title( $input ) {
+		  global $post_type;
+
+		  if ( is_admin() && 'custom_training' == $post_type ) {
+		    return __( 'Enter title of this training', 'roots' );
+		  }
+
+		  return $input;
+		}
+
+		add_filter( 'enter_title_here', 'custom_enter_title' );
 	}
 
 
