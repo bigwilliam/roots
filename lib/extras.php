@@ -10,7 +10,7 @@ include 'extras/menu.php';           // Changes to the admin menu, bar and foote
 include 'extras/tinymce.php';        // TinyMCE customizations
 include 'extras/admin_columns.php';  // Admin columns
 include 'extras/login.php';          // Custom login page
-include 'extras/gf_functions.php';   // Gravity forms hooks n filters
+//include 'extras/gf_functions.php';   // Gravity forms hooks n filters
 
 // Post types
-include "extras/posttypes/custom_events.php";
+//include "extras/posttypes/custom_events.php";
