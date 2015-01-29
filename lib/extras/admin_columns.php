@@ -3,6 +3,9 @@
  * => Custom Admin Columns !
  * ---------------------------------------------------------------------------*/
 
+// A GREAT REFERENCE FOR THESE
+// http://code.tutsplus.com/articles/quick-tip-add-custom-columns-in-wordpress-manage-screens--wp-25457
+
 /* ALL POST TYPES: posts AND custom post types */
 // add_filter('manage_posts_columns', 'CUSTOM_columns_head');
 // add_action('manage_posts_custom_column', 'CUSTOM_columns_content', 10, 2);
@@ -16,8 +19,21 @@
 // add_action('manage_page_posts_custom_column', 'CUSTOM_columns_content', 10, 2);
 
 /* ONLY CUSTOM POST TYPES ( change POSTTYPE to match the correct name) */
-// add_filter('manage_POSTTYPE_posts_columns', 'CUSTOM_columns_head', 10);
-// add_action('manage_POSTTYPE_posts_custom_column', 'CUSTOM_columns_content', 10, 2);
+// add_filter('manage_{$posttype}_posts_columns', 'CUSTOM_columns_head', 10);
+// add_action('manage_{$posttype}_posts_custom_column', 'CUSTOM_columns_content', 10, 2);
+
+/* FOR TAXONOMY COLUMNS */
+// function event_tax_columns_head($defaults) {
+//   $defaults['event-type-color']  = 'Color';
+//   return $defaults;
+// }
+// function event_tax_columns_content_taxonomy($c, $column_name, $term_id) {
+//   if ($column_name == 'event-type-color') {
+//     echo 'The term ID is: ' . $term_id;
+//   }
+// }
+// add_filter('manage_edit-naffa_event_type_columns', 'event_tax_columns_head');
+// add_filter('manage_naffa_event_type_custom_column', 'event_tax_columns_content_taxonomy', 10, 3);
 
 /* CREATE TWO FUNCTIONS TO HANDLE THE COLUMN */
 function CUSTOM_columns_head($defaults) {
@@ -38,3 +54,23 @@ function CUSTOM_columns_content($column_name, $post_ID) {
     echo "content here";
   }
 }
+
+// add_filter('manage_POSTTYPE_posts_columns', 'CUSTOM_columns_head', 10);
+// add_action('manage_POSTTYPE_posts_custom_column', 'CUSTOM_columns_content', 10, 2);
+
+// Make these columns sortable
+function sortable_columns() {
+  return array(
+    'YOURCOLUMNNAME' => 'YOURCOLUMNNAME'
+  );
+}
+// add_filter( "manage_edit-YOURPOSTTYPENAME_sortable_columns", "sortable_columns" );
+
+// CSS for admin columns
+
+function custom_admin_css() {
+  echo '<style>
+
+  </style>';
+ }
+// add_action('admin_head', 'custom_admin_css');

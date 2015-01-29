@@ -17,8 +17,11 @@ function remove_menu_items() {
   // match and remove if needed
   if( !in_array( $current_user->user_login, $admins ) ) {
     remove_menu_page('edit.php?post_type=acf-field-group'); // Remove ACF Menu
-    remove_menu_page('acf-options'); // Remove ACF Options
-    remove_menu_page('wptouch-admin-touchboard'); // WP Touch Mobile Theme Plugin
+    remove_menu_page('acf-options');                        // Remove ACF Options
+    remove_menu_page('wptouch-admin-touchboard');           // WP Touch Mobile Theme Plugin
+    remove_menu_page('tools.php');                          // Tools
+    remove_menu_page('plugins.php');                        // Plugins
+    remove_menu_page('options-general.php');                // Settings
   }
 }
 
@@ -32,20 +35,37 @@ function custom_menu_names() {
   global $menu;
   $menu[5][0] = 'Blog';
 }
-add_action( 'admin_menu', 'custom_menu_names', 999 );
+// add_action( 'admin_menu', 'custom_menu_names', 999 );
+
+
+/*
+ * => Move 'Pages' above 'Posts'
+ * ---------------------------------------------------------------------------*/
+
+function pages_above_posts( $menu_order ) {
+    return array(
+        'index.php',
+        'edit.php?post_type=page',
+        'edit.php',
+        'upload.php',
+    );
+}
+add_filter( 'custom_menu_order', '__return_true' );
+add_filter( 'menu_order', 'pages_above_posts' );
+
 
 /*
  * => ACF Options Pages
  * ----------------------------------------------------------------*/
 if( function_exists('acf_add_options_page') ) {
   
-  acf_add_options_page(array(
-    'page_title'  => 'Theme General Settings',
-    'menu_title'  => 'Theme Settings',
-    'menu_slug'   => 'theme-general-settings',
-    'capability'  => 'edit_posts',
-    'redirect'    => false
-  ));
+  // acf_add_options_page(array(
+  //   'page_title'  => 'Theme General Settings',
+  //   'menu_title'  => 'Theme Settings',
+  //   'menu_slug'   => 'theme-general-settings',
+  //   'capability'  => 'edit_posts',
+  //   'redirect'    => false
+  // ));
 
   // acf_add_options_sub_page(array(
   //   'page_title'  => 'Theme General Settings',
@@ -80,7 +100,7 @@ function change_admin_bar() {
   $wp_admin_bar->remove_menu( 'new-link'        );
   $wp_admin_bar->remove_menu( 'new-media'       );
   $wp_admin_bar->remove_menu( 'new-user'        );
-  $wp_admin_bar->remove_menu( 'comments'        );
+  // $wp_admin_bar->remove_menu( 'comments'        );
   $wp_admin_bar->remove_menu( 'about'           );
   $wp_admin_bar->remove_menu( 'wporg'           );
   $wp_admin_bar->remove_menu( 'documentation'   );
@@ -103,7 +123,7 @@ function change_admin_bar() {
     'href'   => 'http://bigwilliam.com/contact'
   ) );
 }
-add_action( 'wp_before_admin_bar_render', 'change_admin_bar' );
+// add_action( 'wp_before_admin_bar_render', 'change_admin_bar' );
 
 /*
  * => Replace Footer text
@@ -117,4 +137,4 @@ function replace_footer_text () {
      __( 'BigWilliam', 'roots' ) 
   );
 }
-add_filter( 'admin_footer_text', 'replace_footer_text' );
+// add_filter( 'admin_footer_text', 'replace_footer_text' );
