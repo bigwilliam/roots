@@ -61,3 +61,45 @@
   position: absolute;
   left: -9000px;
 }
+
+// Checkboxes
+.gfield_checkbox {
+  input[type=checkbox] {
+    width: 30px;
+    height: .95em;
+    display: inline;
+    border: none;
+    box-shadow: none;
+  }
+}
+
+@media screen and ( min-width: @screen-xs-min ) {
+  .gform_wrapper {
+    .gf_left_half {
+      margin: 0 0 8px 0;
+      width: 49%;
+      float: left;
+      clear: left;
+    }
+    .gf_right_half {
+      margin: 0 0 8px 0;
+      width: 49%;
+      float: right;
+      clear: right;
+    }
+    // for complex parts, such as addresses
+    .ginput_left {
+      width: 49%;
+      float: left;
+      clear: left;
+    }
+    .ginput_right {
+      width: 49%;
+      float: right;
+      clear: right;
+    }
+    .gf_clear, .gf_clear_complex {
+      clear: both;
+    }
+  }
+}
