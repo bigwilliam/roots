@@ -26,18 +26,21 @@ function customtinymce_register_tinymce_javascript($plugin_array) {
 
 
 
-// other stuff
-function pajaro_mce_buttons_2($buttons) {
-  array_unshift($buttons, 'styleselect');
-  array_splice($buttons, 4, 0, 'backcolor');
+/*
+ * => Enable the styles on TinyMCE
+ * ---------------------------------------------------------------------------*/
 
-//  $remove = array('redo','undo','outdent','indent');
-//  $buttons = array_diff($buttons,$remove);
-
+// Callback function to insert 'styleselect' into the $buttons array
+function my_mce_buttons_2( $buttons ) {
+  array_unshift( $buttons, 'styleselect' );
   return $buttons;
 }
-// add_filter('mce_buttons_2', 'pajaro_mce_buttons_2');
+// Register our callback to the appropriate filter
+add_filter('mce_buttons_2', 'my_mce_buttons_2');
 
+/*
+ * => Add Styles to TinyMCE
+ * ---------------------------------------------------------------------------*/
 function mce_before_init_insert_formats($init_array) {
   // custom style formats
   $style_formats = array(
