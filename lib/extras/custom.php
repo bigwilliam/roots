@@ -66,3 +66,18 @@ if ( !function_exists('soil_nice_search_redirect') ) {
   }
   add_action('template_redirect', 'soil_nice_search_redirect');
 }
+
+/*
+ * => Debug
+ * --------------------------------------*/
+if ( ! function_exists( 'bigwilliam_debug' ) ) {
+  function bigwilliam_debug( $message ) {
+    if ( WP_DEBUG === true ) {
+      if ( is_array( $message ) || is_object( $message ) ) {
+        error_log( print_r( $message, true ) );
+      } else {
+        error_log( $message );
+      }
+    }
+  }
+}
