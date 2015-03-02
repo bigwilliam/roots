@@ -75,6 +75,8 @@
 
 @media screen and ( min-width: @screen-xs-min ) {
   .gform_wrapper {
+
+    // 2 columns
     .gf_left_half {
       margin: 0 0 8px 0;
       width: 49%;
@@ -87,6 +89,28 @@
       float: right;
       clear: right;
     }
+
+    // 3 columns
+    .gf_left_third,
+    .gf_middle_third,
+    .gf_right_third {
+      margin: 0 0 0.50em 0;
+      width: 32%;
+    }
+    .gf_left_third {
+      float: left;
+      clear: left;
+    }
+    .gf_middle_third {
+      float: left;
+      clear: none;
+      margin-left: 2%;
+    }
+    .gf_right_third {
+      float: right;
+      clear: right;
+    }
+
     // for complex parts, such as addresses
     .ginput_left {
       width: 49%;
