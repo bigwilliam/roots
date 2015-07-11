@@ -155,7 +155,15 @@ class Custom_Events_Post_Type {
 	 * @since  1.0.0
 	 * @return void
 	 */
-	public function register_shortcodes() {}
+	public function register_shortcodes() {
+		add_shortcode( 'my_shortcode', array( $this, 'my_shortcode_function' ) );
+	}
+
+	public function my_shortcode_function() {
+		// Shortcode content here
+		ob_start();
+		return ob_ge_clean();
+	}
 
 
 	/**

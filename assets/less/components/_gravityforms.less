@@ -65,7 +65,7 @@
 // Checkboxes
 .gfield_checkbox {
   input[type=checkbox] {
-    width: 30px;
+    width: 1em;
     height: .95em;
     display: inline;
     border: none;
@@ -128,6 +128,17 @@
     }
     .gf_clear, .gf_clear_complex {
       clear: both;
+    }
+
+    // lists
+    .gf_list_inline ul.gfield_checkbox li, 
+    .gf_list_inline ul.gfield_radio li {
+      width: auto !important;
+      float: none !important;
+      margin: 0 0.625em 0.625em 0;
+      display: -moz-inline-stack;
+      display: inline-block;
+      zoom: 1;
     }
   }
 }

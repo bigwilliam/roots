@@ -41,6 +41,16 @@ function imagelink_setup() {
 }
 add_action('admin_init', 'imagelink_setup', 10);
 
+
+/*
+ * => Allow Editors to edit Gravity Forms
+ * ---------------------------------------------------------------------------*/
+function add_grav_forms(){
+  $role = get_role('editor');
+  $role->add_cap('gform_full_access');
+}
+add_action('admin_init','add_grav_forms');
+
 /*
  * => Nice search queries (not needed if using soil plugin)
  * ---------------------------------------------------------------------------*/
